@@ -9,8 +9,6 @@ opencv-python = "*"
 numpy = "*"
 matplotlib = "*"
 tensorflow = "*"
-rospkg = "*"
-rospy = "*"
 gym = "*"
 
 [dev-packages]

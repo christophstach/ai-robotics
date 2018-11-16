@@ -11,30 +11,25 @@ model = Sequential([
     BatchNormalization(),
     Activation('relu'),
 
-    Conv2D(filters=64, kernel_size=5),
+    Conv2D(filters=32, kernel_size=5),
     BatchNormalization(),
     Activation('relu'),
 
-    Conv2D(filters=64, kernel_size=5),
+    Conv2D(filters=16, kernel_size=5),
     BatchNormalization(),
     Activation('relu'),
 
     Flatten(),
 
-    Dense(128),
-    BatchNormalization(),
-    Activation('relu'),
-    Dropout(0.5),
-
     Dense(64),
     BatchNormalization(),
     Activation('relu'),
-    Dropout(0.5),
+    Dropout(0.25),
 
     Dense(32),
     BatchNormalization(),
     Activation('relu'),
-    Dropout(0.5),
+    Dropout(0.25),
 
     Dense(10),
     BatchNormalization(),
