@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from os.path import realpath, dirname
 
 import numpy as np
 import rospy
@@ -15,7 +14,8 @@ class Prediction:
         self.cv_bridge = CvBridge()
         self.publisher_specific_number = None
 
-        filepath = dirname(realpath(__file__)) + '/model.h5'
+        # filepath = dirname(realpath(__file__)) + '/model.h5'
+        filepath = '/home/christoph/PycharmProjects/robotik-tomato-long-antbear/src/excercise_1/src/model.h5'
         self.model = load_model(filepath)
         self.graph = tf.get_default_graph()
 
@@ -44,6 +44,7 @@ class Prediction:
             img = self.cv_bridge.compressed_imgmsg_to_cv2(msg)
             batch = np.expand_dims(img, axis=0)
             batch = batch.reshape(-1, 28, 28, 1)
+            batch = batch / 255.0
 
             pred_one_hot = self.model.predict(batch)
             pred = np.argmax(pred_one_hot)
@@ -61,7 +62,7 @@ class Prediction:
             img = self.cv_bridge.compressed_imgmsg_to_cv2(msg)
             batch = np.expand_dims(img, axis=0)
             batch = batch.reshape(-1, 28, 28, 1)
-            batch /= 255
+            batch = batch / 255.0
 
             pred_one_hot = self.model.predict(batch)
             pred = np.argmax(pred_one_hot)
@@ -81,9 +82,9 @@ def main():
         # init CameraPseudo
         prediction = Prediction()
 
-        # prediction.subscribe_specific_image()
-        # prediction.subscribe_specific_check()
-        # prediction.publish_specific_number()
+        prediction.subscribe_specific_image()
+        prediction.subscribe_specific_check()
+        prediction.publish_specific_number()
 
         prediction.subscribe_random_image()
         prediction.subscribe_random_number()

@@ -3,37 +3,46 @@
 
 ##  Erstellung eines Keras Models 
 
-Für das Keras 3 Convolutional Layer + 3 FullyConnected Layer (mit DropOut und Batch Normalisierung verwendet).
+Für das Keras 3 Convolutional Layer + 4 FullyConnected Layer (mit DropOut und Batch Normalisierung verwendet).
 
 ```python
-model = Sequential([
-    Conv2D(filters=64, kernel_size=5, input_shape=(28, 28, 1)),
-    BatchNormalization(),
-    Activation('relu'),
+num_classes=10
+num_filters = 64
+num_dense_neurons = 64
 
-    Conv2D(filters=32, kernel_size=5),
-    BatchNormalization(),
-    Activation('relu'),
+tf.keras.models.Sequential([
+    layers.Conv2D(filters=num_filters, kernel_size=5, input_shape=(28, 28, 1)),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
 
-    Conv2D(filters=16, kernel_size=5),
-    BatchNormalization(),
-    Activation('relu'),
+    layers.Conv2D(filters=num_filters, kernel_size=5),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
 
-    Flatten(),
+    layers.Conv2D(filters=num_filters, kernel_size=5),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
 
-    Dense(64),
-    BatchNormalization(),
-    Activation('relu'),
-    Dropout(0.25),
+    layers.Flatten(),
 
-    Dense(32),
-    BatchNormalization(),
-    Activation('relu'),
-    Dropout(0.25),
+    layers.Dense(num_dense_neurons),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
+    layers.Dropout(0.25),
 
-    Dense(10),
-    BatchNormalization(),
-    Activation('softmax')
+    layers.Dense(num_dense_neurons),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
+    layers.Dropout(0.25),
+
+    layers.Dense(num_dense_neurons),
+    layers.BatchNormalization(),
+    layers.Activation('relu'),
+    layers.Dropout(0.25),
+
+    layers.Dense(num_classes),
+    layers.BatchNormalization(),
+    layers.Activation('softmax')
 ])
 ```
 

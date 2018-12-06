@@ -4,12 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-keras = "*"
-opencv-python = "*"
 numpy = "*"
-matplotlib = "*"
 tensorflow = "*"
-gym = "*"
+jupyter = "*"
+matplotlib = "*"
+toolz = "*"
+pyyaml = "*"
+opencv-python = "*"
+rospkg = "*"
+keras = "*"
 
 [dev-packages]
 
